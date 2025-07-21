@@ -265,7 +265,7 @@ constructor(
 
     @Composable
     private fun Content() {
-        PlatformTheme(isDarkTheme = if (notificationShadeBlur()) isSystemInDarkTheme() else true) {
+        PlatformTheme {
             ProvideShortcutHelperIndication(interactionsConfig = interactionsConfig()) {
                 // TODO(b/389985793): Make sure that there is no coroutine work or recompositions
                 // happening when alwaysCompose is true but isQsVisibleAndAnyShadeExpanded is false.
@@ -1410,18 +1410,16 @@ fun BrightnessLayout(
             .systemGestureExclusionInShade(enabled = { enable })
             .fillMaxWidth()
     ) {
-        AlwaysDarkMode {
-            BrightnessSliderContainer(
-                viewModel = cvm.brightnessSliderViewModel,
-                containerColors = ContainerColors(
-                    Color.Transparent,
-                    ContainerColors.defaultContainerColor
-                ),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = QuickSettingsShade.Dimensions.InnerPadding)
-            )
-        }
+        BrightnessSliderContainer(
+            viewModel = cvm.brightnessSliderViewModel,
+            containerColors = ContainerColors(
+                Color.Transparent,
+                ContainerColors.defaultContainerColor
+            ),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = QuickSettingsShade.Dimensions.InnerPadding)
+        )
     }
 }
 
@@ -1447,31 +1445,3 @@ private fun interactionsConfig() =
 
 private inline val alwaysCompose
     get() = Flags.alwaysComposeQsUiFragment()
-
-/**
- * Forces the configuration and themes to be dark theme. This is needed in order to have
- * [colorResource] retrieve the dark mode colors.
- *
- * This should be removed when [notificationShadeBlur] is removed
- */
-@Composable
-private fun AlwaysDarkMode(content: @Composable () -> Unit) {
-    if (notificationShadeBlur()) {
-        content()
-    } else {
-        val currentConfig = LocalConfiguration.current
-        val darkConfig =
-            Configuration(currentConfig).apply {
-                uiMode =
-                    (uiMode and (Configuration.UI_MODE_NIGHT_MASK.inv())) or
-                        Configuration.UI_MODE_NIGHT_YES
-            }
-        val newContext = LocalContext.current.createConfigurationContext(darkConfig)
-        CompositionLocalProvider(
-            LocalConfiguration provides darkConfig,
-            LocalContext provides newContext,
-        ) {
-            content()
-        }
-    }
-}
