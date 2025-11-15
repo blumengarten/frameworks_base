@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Copyright (C) 2021 The Android Open Source Project
+  ~ Copyright (C) 2025 Halcyon Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -20,7 +20,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/qqs_header_constraint">
 
-    <!-- CLOCK (top line) -->
     <Constraint android:id="@+id/clock">
         <Layout
             android:layout_width="wrap_content"
@@ -29,36 +28,30 @@
             android:layout_marginStart="@dimen/qs_status_bar_margin_start"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="@+id/begin_guide"/>
-        <Transform
-            android:scaleX="1"
-            android:scaleY="1"/>
     </Constraint>
 
-    <!-- DATE (second line, left aligned) -->
     <Constraint android:id="@+id/date">
         <Layout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="32sp"
-            android:layout_marginTop="2dp"
+            android:textSize="34sp"
+            android:layout_marginTop="20dp"
             app:layout_constraintTop_toBottomOf="@+id/clock"
             app:layout_constraintStart_toStartOf="@+id/clock"
             app:layout_constraintEnd_toStartOf="@+id/shade_header_system_icons"
             app:layout_constraintHorizontal_bias="0"/>
     </Constraint>
 
-    <!-- SYSTEM ICONS (same row as date, right aligned) -->
     <Constraint android:id="@+id/shade_header_system_icons">
         <Layout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/qs_status_bar_margin_end"
+            android:layout_marginEnd="8dp"
             app:layout_constraintTop_toTopOf="@+id/date"
             app:layout_constraintBottom_toBottomOf="@+id/date"
-            app:layout_constraintEnd_toEndOf="@+id/end_guide"/>
+            app:layout_constraintEnd_toEndOf="parent"/>
     </Constraint>
 
-    <!-- CARRIER GROUP (hidden) -->
     <Constraint android:id="@+id/carrier_group">
         <Layout
             android:layout_width="wrap_content"
@@ -69,13 +62,11 @@
         <PropertySet android:alpha="0"/>
     </Constraint>
 
-    <!-- PRIVACY INDICATORS (hidden) -->
     <Constraint android:id="@+id/privacy_container">
         <Layout
             android:layout_width="wrap_content"
             android:layout_height="@dimen/large_screen_shade_header_min_height"
-            android:layout_marginEnd="@dimen/qs_status_bar_margin_end"
-            app:layout_constraintEnd_toEndOf="@+id/end_guide"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/date"
             app:layout_constraintTop_toTopOf="parent"/>
         <PropertySet android:alpha="0"/>
