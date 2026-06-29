@@ -128,6 +128,7 @@ import com.android.server.alarm.AlarmManagerService;
 import com.android.server.am.ActivityManagerService;
 import com.android.server.ambientcontext.AmbientContextManagerService;
 import com.android.server.app.AppLockManagerService;
+import com.android.server.appbackup.AppDataBackupService;
 import com.android.server.app.GameManagerService;
 import com.android.server.appbinding.AppBindingService;
 import com.android.server.appfunctions.AppFunctionManagerService;
@@ -2829,8 +2830,13 @@ public final class SystemServer implements Dumpable {
             mSystemServiceManager.startService(FreeformService.class);
             t.traceEnd();
 
+<<<<<<< HEAD
             t.traceBegin("AppLockManagerService");
             mSystemServiceManager.startService(AppLockManagerService.Lifecycle.class);
+=======
+            t.traceBegin("AppDataBackupService");
+            mSystemServiceManager.startService(AppDataBackupService.class);
+>>>>>>> 068ebca30ca8 ([1/4] Introduce a native backup/restore solution)
             t.traceEnd();
 
             if (!isWatch) {
