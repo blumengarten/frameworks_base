@@ -2830,13 +2830,12 @@ public final class SystemServer implements Dumpable {
             mSystemServiceManager.startService(FreeformService.class);
             t.traceEnd();
 
-<<<<<<< HEAD
             t.traceBegin("AppLockManagerService");
             mSystemServiceManager.startService(AppLockManagerService.Lifecycle.class);
-=======
+            t.traceEnd();
+
             t.traceBegin("AppDataBackupService");
             mSystemServiceManager.startService(AppDataBackupService.class);
->>>>>>> 068ebca30ca8 ([1/4] Introduce a native backup/restore solution)
             t.traceEnd();
 
             if (!isWatch) {
